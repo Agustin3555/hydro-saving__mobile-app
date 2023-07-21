@@ -1,4 +1,4 @@
-import { Size } from '@/styles'
+import { SizeExtended } from '@/styles'
 import { StyleSheet } from 'react-native'
 
 export type Layout = StyleSheet.NamedStyles<{
@@ -7,8 +7,8 @@ export type Layout = StyleSheet.NamedStyles<{
 }>
 
 export interface Props {
-  width?: Size
-  height?: Size
+  width?: SizeExtended
+  height?: SizeExtended
   angle: number
 }
 

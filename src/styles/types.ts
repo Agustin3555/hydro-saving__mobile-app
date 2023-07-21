@@ -2,11 +2,14 @@ import { COLOR, FONT, FONT_SIZE, MICROINTERACTION, NOT_FONT_SIZE } from './enums
 
 export type Font = FONT
 
-export type FontSize = 0 | FONT_SIZE | '100%'
+export type FontSize = 0 | FONT_SIZE
+export type FontSizeExtended = FontSize | '100%'
 
-export type NotFontSize = 0 | NOT_FONT_SIZE | '100%'
+export type NotFontSize = 0 | NOT_FONT_SIZE
+export type NotFontSizeExtended = NotFontSize | '100%'
 
 export type Size = FontSize | NotFontSize
+export type SizeExtended = FontSizeExtended | NotFontSizeExtended
 
 export type Color = COLOR
 

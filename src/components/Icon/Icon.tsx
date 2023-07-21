@@ -3,12 +3,12 @@ import { View } from 'react-native'
 import { IconProp } from '@fortawesome/fontawesome-svg-core'
 import * as IconStyled from './Icon.styled'
 import { useMemo } from 'react'
-import { COLOR } from '@/styles'
+import { COLOR, FONT_SIZE } from '@/styles'
 
 export const Icon = ({
   faIcon,
   // TODO: establecer el color mas utilizado
-  style = { size: 32, color: COLOR.g_0 },
+  style = { size: FONT_SIZE.xl, color: COLOR.g_0 },
   extendedStyle,
 }: {
   faIcon: IconProp

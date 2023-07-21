@@ -6,15 +6,26 @@ import {
   faChartPie,
 } from '@fortawesome/free-solid-svg-icons'
 import { styles } from './Nav.styled'
-import { Icon } from '..'
+import Tab from '../Tab/Tab'
+import { SECTIONS } from '@/store'
+
+const tabs = [
+  { sectionKey: SECTIONS.statistics, faIcon: faChartPie },
+  { sectionKey: SECTIONS.home, faIcon: faHouse },
+  { sectionKey: SECTIONS.tips, faIcon: faLightbulb },
+  { sectionKey: SECTIONS.forum, faIcon: faUsers },
+]
 
 const Nav = () => {
   return (
     <View style={styles.nav}>
-      <Icon faIcon={faChartPie} />
-      <Icon faIcon={faHouse} />
-      <Icon faIcon={faLightbulb} />
-      <Icon faIcon={faUsers} />
+      {tabs.map(item => (
+        <Tab
+          sectionKey={item.sectionKey}
+          faIcon={item.faIcon}
+          key={item.sectionKey}
+        />
+      ))}
     </View>
   )
 }

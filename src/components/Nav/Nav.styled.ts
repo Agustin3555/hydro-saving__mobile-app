@@ -1,11 +1,13 @@
 import { FONT_SIZE, NOT_FONT_SIZE } from '@/styles'
+import { getParentBorderRadius } from '@/tools'
 import { StyleSheet } from 'react-native'
 
 export type Layout = StyleSheet.NamedStyles<{
   nav?: {}
 }>
 
-const BORDER_RADIUS = NOT_FONT_SIZE.m
+const PADDING = NOT_FONT_SIZE.xs
+const BORDER_RADIUS = getParentBorderRadius(FONT_SIZE.xl * 0.5 + PADDING, PADDING)
 
 export const styles = StyleSheet.create({
   nav: {
@@ -13,7 +15,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     width: '100%',
-    padding: FONT_SIZE.xl,
+    padding: PADDING,
     borderTopLeftRadius: BORDER_RADIUS,
     borderTopRightRadius: BORDER_RADIUS,
     backgroundColor: 'blue',
