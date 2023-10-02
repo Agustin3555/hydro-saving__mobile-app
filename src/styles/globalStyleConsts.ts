@@ -1,4 +1,6 @@
-import { COLOR } from './enums'
+import { COLOR, FONT_SIZE } from './enums'
+
+export const MAIN_GAP = FONT_SIZE['2xs'] * 3
 
 export const BGC_DARK_A = COLOR.g_16
 export const BGC_BRIGHT_A = COLOR.g_1

@@ -32,17 +32,17 @@ export enum NOT_FONT_SIZE {
 }
 
 export enum COLOR {
-  a_d2 = '#000000',
-  a_d1 = '#000000',
-  a = '#000000',
-  a_b1 = '#000000',
-  a_b2 = '#000000',
+  a_d2 = '#112060',
+  a_d1 = '#1f3aaf',
+  a = '#2d55ff',
+  a_b1 = '#6f8aff',
+  a_b2 = '#b0bfff',
 
-  b_d2 = '#000000',
-  b_d1 = '#000000',
-  b = '#000000',
-  b_b1 = '#000000',
-  b_b2 = '#000000',
+  b_d2 = '#22a1e2',
+  b_d1 = '#0097b2',
+  b = '#00c4cc',
+  b_b1 = '#5ce1e6',
+  b_b2 = '#9fcdff',
 
   c_d2 = '#000000',
   c_d1 = '#000000',
@@ -79,9 +79,9 @@ export enum COLOR {
 }
 
 export enum MICROINTERACTION {
-  xs = 0.125,
-  s = 0.25,
-  m = 0.5,
-  l = 1,
-  xl = 2,
+  xs = 125,
+  s = 250,
+  m = 500,
+  l = 1000,
+  xl = 2000,
 }

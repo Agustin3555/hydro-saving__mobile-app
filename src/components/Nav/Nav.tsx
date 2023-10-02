@@ -1,30 +1,26 @@
 import { View } from 'react-native'
 import {
   faLightbulb,
-  faUsers,
   faHouse,
   faChartPie,
+  faUserGear,
 } from '@fortawesome/free-solid-svg-icons'
 import { styles } from './Nav.styled'
 import Tab from '../Tab/Tab'
 import { SECTIONS } from '@/store'
 
 const tabs = [
-  { sectionKey: SECTIONS.statistics, faIcon: faChartPie },
-  { sectionKey: SECTIONS.home, faIcon: faHouse },
-  { sectionKey: SECTIONS.tips, faIcon: faLightbulb },
-  { sectionKey: SECTIONS.forum, faIcon: faUsers },
+  { sectionKey: SECTIONS.statistics, faIcon: faChartPie, title: 'Estadísticas' },
+  { sectionKey: SECTIONS.home, faIcon: faHouse, title: 'Home' },
+  { sectionKey: SECTIONS.tips, faIcon: faLightbulb, title: 'Tips' },
+  { sectionKey: SECTIONS.userSettings, faIcon: faUserGear, title: 'Ajustes' },
 ]
 
 const Nav = () => {
   return (
     <View style={styles.nav}>
       {tabs.map(item => (
-        <Tab
-          sectionKey={item.sectionKey}
-          faIcon={item.faIcon}
-          key={item.sectionKey}
-        />
+        <Tab {...item} key={item.sectionKey} />
       ))}
     </View>
   )

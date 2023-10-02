@@ -1,7 +1,7 @@
 import { View } from 'react-native'
 import { Svg, Defs, LinearGradient, Stop, Rect, NumberProp } from 'react-native-svg'
 import * as GradientViewStyled from './GradientView.styled'
-import { useMemo } from 'react'
+import { ReactElement, useMemo } from 'react'
 import { COLOR, Color } from '@/styles'
 
 type Stops = {
@@ -11,17 +11,17 @@ type Stops = {
 
 const GradientView = ({
   stops = [
-    { offset: '0%', color: COLOR.g_0 },
-    { offset: '100%', color: COLOR.g_19 },
+    { offset: '0%', color: COLOR.a_b1 },
+    { offset: '100%', color: COLOR.a_d1 },
   ],
-  style = { width: '100%', height: '100%', angle: 0 },
+  style = { width: '100%', height: '100%', angle: 45 },
   extendedStyle,
   children,
 }: {
   stops?: Stops
   style?: GradientViewStyled.Props
   extendedStyle?: GradientViewStyled.Layout
-  children?: JSX.Element | JSX.Element[]
+  children?: ReactElement | ReactElement[]
 }) => {
   const styles = useMemo(
     () => GradientViewStyled.adapter({ extendedStyle, style }),
@@ -53,7 +53,7 @@ const GradientView = ({
         </Defs>
         <Rect x="0" y="0" width="100%" height="100%" fill="url(#grad)" />
       </Svg>
-      <View style={styles.content}>{children && children}</View>
+      {children && <View style={styles.content}>{children}</View>}
     </View>
   )
 }

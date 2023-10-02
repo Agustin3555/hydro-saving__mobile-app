@@ -4,7 +4,7 @@ export enum SECTIONS {
   statistics = 'statistics',
   home = 'home',
   tips = 'tips',
-  forum = 'forum',
+  userSettings = 'userSettings',
 }
 
 export interface CurrentSectionSlice {

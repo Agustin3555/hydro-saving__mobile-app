@@ -1,4 +1,4 @@
-import { SizeExtended } from '@/styles'
+import { Size } from '@/styles'
 import { StyleSheet } from 'react-native'
 
 export type Layout = StyleSheet.NamedStyles<{
@@ -7,8 +7,8 @@ export type Layout = StyleSheet.NamedStyles<{
 }>
 
 export interface Props {
-  width?: SizeExtended
-  height?: SizeExtended
+  width?: Size
+  height?: Size
   angle: number
 }
 
@@ -18,7 +18,7 @@ export const adapter = ({
 }: {
   style?: Props
   extendedStyle?: Layout
-}): Layout => {
+}) => {
   return StyleSheet.create({
     container: {
       width: style?.width,

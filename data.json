@@ -1,0 +1,15 @@
+{
+  "name": "Rosario",
+  "aboutTheTank": {
+    "maxLevel": 0.12,
+    "minLevel": 1.75,
+    "diameter": 0.8
+  },
+  "history": [
+    { "time": "2020:--", "charge": 0.5 },
+    { "time": "2020:--", "charge": 0.5 },
+    { "time": "2020:--", "charge": 0.5 },
+    { "time": "2020:--", "charge": 0.5 },
+    { "time": "2020:--", "charge": 0.5 }
+  ]
+}
