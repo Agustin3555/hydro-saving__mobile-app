@@ -14,11 +14,7 @@ const Main = () => {
   return (
     <>
       <StatusBar style="light" />
-      <GradientView
-        extendedStyle={{
-          container: {},
-        }}
-      >
+      <GradientView>
         <View style={styles.sections}>
           <Statistics />
           <Home />

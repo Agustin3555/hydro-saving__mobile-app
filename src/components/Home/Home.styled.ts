@@ -1,29 +1,18 @@
-import { COLOR, FONT_SIZE, MAIN_GAP } from '@/styles'
+import { COLOR, FONT_SIZE, MAIN_GAP, NOT_FONT_SIZE } from '@/styles'
 import { StyleSheet } from 'react-native'
-
-export type Layout = StyleSheet.NamedStyles<{
-  desc?: {}
-  main?: {}
-  input?: {}
-  percent?: {}
-  water?: {}
-  waterWave?: {}
-  waterBody?: {}
-  tank?: {}
-}>
 
 export const styles = StyleSheet.create({
   desc: {
     textAlign: 'center',
+    fontFamily: 'Inter-Regular',
     fontSize: FONT_SIZE.xs,
-    lineHeight: FONT_SIZE.xs,
     color: COLOR.g_2,
   },
   main: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    gap: MAIN_GAP,
+    gap: MAIN_GAP * 1.25,
   },
   input: {
     position: 'absolute',
@@ -35,6 +24,7 @@ export const styles = StyleSheet.create({
     borderWidth: 1,
   },
   percent: {
+    fontFamily: 'Inter-Regular',
     fontSize: FONT_SIZE.xl,
     lineHeight: FONT_SIZE.xl,
     color: COLOR.g_0,
@@ -61,5 +51,19 @@ export const styles = StyleSheet.create({
   },
   tank: {
     aspectRatio: 158 / 197,
+  },
+  flowContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: FONT_SIZE.xs,
+    paddingHorizontal: FONT_SIZE.xs,
+    paddingVertical: FONT_SIZE.xs * 0.5,
+    backgroundColor: COLOR.g_2,
+    borderRadius: NOT_FONT_SIZE['6xl'],
+  },
+  flow: {
+    fontFamily: 'Inter-Regular',
+    fontSize: FONT_SIZE.xs,
+    color: COLOR.a,
   },
 })

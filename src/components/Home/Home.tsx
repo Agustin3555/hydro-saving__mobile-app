@@ -4,11 +4,22 @@ import Section from '../Section/Section'
 import { SECTIONS } from '@/store'
 import { styles } from './Home.styled'
 import { useEffect, useRef, useState } from 'react'
-import { MICROINTERACTION, NOT_FONT_SIZE } from '@/styles'
+import { COLOR, FONT_SIZE, MICROINTERACTION, NOT_FONT_SIZE } from '@/styles'
 import Tank from '@/../assets/tank.svg'
+import BackgroundTimer from 'react-native-background-timer'
+import { getTankData } from '@/services'
+import Icon from '../Icon/Icon'
+import { faFaucetDrip } from '@fortawesome/free-solid-svg-icons'
+
+const MIN_DISTANCE = 19
+const H = 25
+
+const maxDistance = MIN_DISTANCE + H
 
 const Home = () => {
   const [percent, setPercent] = useState(0)
+  const [flow, setFlow] = useState(0)
+  const [loaded, setLoaded] = useState(false)
 
   const heightAnim = useRef(new Animated.Value(1)).current
 
@@ -21,24 +32,45 @@ const Home = () => {
     }).start()
   }, [percent])
 
-  const handlePercentPress = () => {
-    if (percent === 100) {
-      setPercent(0)
-      return
+  useEffect(() => {
+    const update = () => {
+      getTankData().then(tankData => {
+        setLoaded(true)
+
+        if (tankData) {
+          let sensorDistance = tankData.sensorDistance
+
+          if (sensorDistance < MIN_DISTANCE) sensorDistance = MIN_DISTANCE
+          if (sensorDistance > maxDistance) sensorDistance = maxDistance
+          sensorDistance = sensorDistance - MIN_DISTANCE
+
+          const newPercent = Math.floor((sensorDistance / H) * 100)
+
+          setPercent(newPercent)
+          setFlow(tankData.flowRate)
+          return
+        }
+
+        setLoaded(false)
+      })
     }
 
-    setPercent(prevPercent => prevPercent + 12.5)
-  }
+    const interval = setInterval(update, 1000)
+
+    return () => {
+      clearInterval(interval)
+    }
+  }, [])
 
   return (
     <Section sectionKey={SECTIONS.home}>
       <Text style={styles.desc} numberOfLines={2}>
-        El porcentaje actual de carga es
+        {loaded
+          ? 'El porcentaje actual de carga es'
+          : 'Conectando con el dispositivo ...'}
       </Text>
       <View style={styles.main}>
-        <TouchableOpacity onPress={handlePercentPress}>
-          <Text style={styles.percent}>{percent} %</Text>
-        </TouchableOpacity>
+        <Text style={styles.percent}>{percent} %</Text>
         <View>
           <View style={styles.water}>
             <Wave
@@ -58,6 +90,13 @@ const Home = () => {
             style={styles.tank}
             height={NOT_FONT_SIZE['4xl'] - NOT_FONT_SIZE.xl}
           />
+        </View>
+        <View style={styles.flowContainer}>
+          <Icon
+            faIcon={faFaucetDrip}
+            style={{ size: FONT_SIZE.xs, color: COLOR.a }}
+          />
+          <Text style={styles.flow}>Caudal: {flow} ml/min</Text>
         </View>
       </View>
     </Section>
