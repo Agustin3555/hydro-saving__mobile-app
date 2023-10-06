@@ -1,1 +1,6 @@
-export type History = { time: string; charge: number }[]
+export interface HistoryItem {
+  timestamp: number
+  sensorDistance: number
+}
+
+export type History = HistoryItem[]

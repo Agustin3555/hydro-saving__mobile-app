@@ -1,4 +1,4 @@
-import { Dimensions, Text, View } from 'react-native'
+import { Dimensions, ScrollView, Text, View } from 'react-native'
 import Section from '../Section/Section'
 import { SECTIONS } from '@/store'
 import { styles } from './Tips.styled'
@@ -38,7 +38,9 @@ const Tips = () => {
                 content: styles.itemContent,
               }}
             >
-              <Text style={styles.tip}>{item}</Text>
+              <ScrollView>
+                <Text style={styles.tip}>{item}</Text>
+              </ScrollView>
             </GradientView>
           )}
         />
