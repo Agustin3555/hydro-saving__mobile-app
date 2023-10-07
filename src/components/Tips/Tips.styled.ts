@@ -20,6 +20,7 @@ export const styles = StyleSheet.create({
     padding: MAIN_GAP * 0.75,
   },
   tip: {
+    textAlign: 'justify',
     fontFamily: 'Inter-Regular',
     fontSize: FONT_SIZE.xs,
     lineHeight: FONT_SIZE.xs * 1.4,

@@ -1,7 +1,7 @@
 import { TankData } from '@/models'
 import { Slice } from '../slice'
 
-const defaultState: TankData = { sensorDistance: 0, flowRate: 0 }
+const DEFAULT_STATE: TankData = { sensorDistance: 0, flowRate: 0 }
 
 export interface TankDataSlice {
   tankData: TankData
@@ -9,6 +9,6 @@ export interface TankDataSlice {
 }
 
 export const createTankDataSlice: Slice<TankDataSlice> = set => ({
-  tankData: defaultState,
+  tankData: DEFAULT_STATE,
   setTankData: value => set(() => ({ tankData: value })),
 })

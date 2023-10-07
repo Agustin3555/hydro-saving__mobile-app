@@ -12,6 +12,8 @@ import { faFaucetDrip } from '@fortawesome/free-solid-svg-icons'
 const Home = () => {
   const { sensorMinDistance, h } = useAppStore(store => store.generalData)
   const { sensorDistance, flowRate } = useAppStore(store => store.tankData)
+
+  // TODO: utilizarlo
   const [loaded, setLoaded] = useState(false)
   const [percent, setPercent] = useState(0)
   const maxDistance = useMemo(() => sensorMinDistance + h, [sensorMinDistance, h])

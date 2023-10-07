@@ -1,11 +1,10 @@
-import { Animated, ScrollView, Text, TouchableOpacity, View } from 'react-native'
+import { ScrollView, Text, TouchableOpacity, View } from 'react-native'
 import Section from '../Section/Section'
 import { SECTIONS, useAppStore } from '@/store'
 import { useState } from 'react'
 import { styles } from './Statistics.styled'
 import { COLOR } from '@/styles'
-
-const AnimatedTouchableOpacity = Animated.createAnimatedComponent(TouchableOpacity)
+import Day from './components/Day/Day'
 
 enum VIEWS {
   day,
@@ -14,11 +13,13 @@ enum VIEWS {
   year,
 }
 
-const views = ['Día', 'Semana', 'Mes', 'Año']
+const viewsText = ['Día', 'Semana', 'Mes', 'Año']
+
+const views = [<Day />, <Text>Semana</Text>, <Text>Mes</Text>, <Text>Año</Text>]
 
 const Statistics = () => {
-  const history = useAppStore(store => store.history)
   const [viewCurrent, setViewCurrent] = useState(VIEWS.day)
+  const consumptionHistory = useAppStore(store => store.consumptionHistory)
 
   const handlePress = (view: VIEWS) => () => {
     setViewCurrent(view)
@@ -26,10 +27,10 @@ const Statistics = () => {
 
   return (
     <Section sectionKey={SECTIONS.statistics}>
-      <ScrollView>
+      <ScrollView style={styles.scrollContainer}>
         <View style={styles.viewSelector}>
-          {views.map((item, index) => (
-            <AnimatedTouchableOpacity
+          {viewsText.map((item, index) => (
+            <TouchableOpacity
               style={[
                 styles.button,
                 index === viewCurrent && { backgroundColor: COLOR.g_2 },
@@ -43,10 +44,11 @@ const Statistics = () => {
               >
                 {item}
               </Text>
-            </AnimatedTouchableOpacity>
+            </TouchableOpacity>
           ))}
         </View>
-        <Text>{JSON.stringify(history)}</Text>
+        {views[viewCurrent]}
+        <Text>{JSON.stringify(consumptionHistory)}</Text>
       </ScrollView>
     </Section>
   )

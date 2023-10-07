@@ -1,14 +1,16 @@
 import { StateCreator } from 'zustand'
 import {
+  ConsumptionThisDaySlice,
   CurrentSectionSlice,
   GeneralDataSlice,
-  HistorySlice,
+  ConsumptionHistorySlice,
   TankDataSlice,
 } from './slices'
 
 export type AppStore = CurrentSectionSlice &
   GeneralDataSlice &
-  HistorySlice &
-  TankDataSlice
+  ConsumptionHistorySlice &
+  TankDataSlice &
+  ConsumptionThisDaySlice
 
 export type Slice<T> = StateCreator<AppStore, [], [], T>

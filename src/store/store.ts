@@ -3,13 +3,15 @@ import { AppStore } from './slice'
 import {
   createCurrentSectionSlice,
   createGeneralDataSlice,
-  createHistorySlice,
+  createConsumptionHistorySlice,
   createTankDataSlice,
+  createConsumptionThisDaySlice,
 } from './slices'
 
 export const useAppStore = create<AppStore>()((...a) => ({
   ...createCurrentSectionSlice(...a),
   ...createGeneralDataSlice(...a),
-  ...createHistorySlice(...a),
+  ...createConsumptionHistorySlice(...a),
   ...createTankDataSlice(...a),
+  ...createConsumptionThisDaySlice(...a),
 }))

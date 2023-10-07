@@ -7,12 +7,14 @@ export enum SECTIONS {
   userSettings = 'userSettings',
 }
 
+const DEFAULT_STATE: SECTIONS = SECTIONS.home
+
 export interface CurrentSectionSlice {
   currentSection: SECTIONS
   setCurrentSection: (sectionKey: SECTIONS) => void
 }
 
 export const createCurrentSectionSlice: Slice<CurrentSectionSlice> = set => ({
-  currentSection: SECTIONS.home,
+  currentSection: DEFAULT_STATE,
   setCurrentSection: sectionKey => set(() => ({ currentSection: sectionKey })),
 })

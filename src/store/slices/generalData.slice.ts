@@ -2,7 +2,7 @@ import { GeneralData } from '@/models'
 import { Slice } from '../slice'
 import { getGeneralData, updateGeneralData } from '@/services'
 
-const defaultState: GeneralData = {
+const DEFAULT_STATE: GeneralData = {
   username: 'Rosario',
   sensorMinDistance: 19,
   h: 25,
@@ -18,8 +18,8 @@ const getInitState = async (): Promise<GeneralData> => {
   const generalDataSaved = await getGeneralData()
   if (generalDataSaved) return generalDataSaved
 
-  await updateGeneralData(defaultState)
-  return defaultState
+  await updateGeneralData(DEFAULT_STATE)
+  return DEFAULT_STATE
 }
 
 export const createGeneralDataSlice: Slice<GeneralDataSlice> = set => {
@@ -30,7 +30,7 @@ export const createGeneralDataSlice: Slice<GeneralDataSlice> = set => {
   })
 
   return {
-    generalData: generalData || defaultState,
+    generalData: generalData || DEFAULT_STATE,
     setGeneralData: async newGeneralData => {
       await updateGeneralData(newGeneralData)
 
