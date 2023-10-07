@@ -4,7 +4,7 @@ import { SECTIONS, useAppStore } from '@/store'
 import { useState } from 'react'
 import { styles } from './Statistics.styled'
 import { COLOR } from '@/styles'
-import Day from './components/Day/Day'
+import { Day, Month, Week } from './components'
 
 enum VIEWS {
   day,
@@ -15,7 +15,7 @@ enum VIEWS {
 
 const viewsText = ['Día', 'Semana', 'Mes', 'Año']
 
-const views = [<Day />, <Text>Semana</Text>, <Text>Mes</Text>, <Text>Año</Text>]
+const views = [<Day />, <Week />, <Month />, <Text>Año</Text>]
 
 const Statistics = () => {
   const [viewCurrent, setViewCurrent] = useState(VIEWS.day)

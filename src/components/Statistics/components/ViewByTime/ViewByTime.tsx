@@ -1,9 +1,15 @@
 import { Text, View } from 'react-native'
 import { styles } from './ViewByTime.styled'
+import { useAppStore } from '@/store'
+import { ReactElement } from 'react'
 
-const ViewByTime = () => {
+const ViewByTime = ({ component }: { component: ReactElement }) => {
+  // const consumptionHistory = useAppStore(store => store.consumptionHistory)
+  // const consumptionThisDay = useAppStore(store => store.consumptionThisDay)
+
   return (
     <View>
+      {component}
       <View style={styles.info}>
         <View style={styles.infoCard}>
           <View style={styles.valueGroup}>
