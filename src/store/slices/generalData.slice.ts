@@ -3,10 +3,10 @@ import { Slice } from '../slice'
 import { getGeneralData, updateGeneralData } from '@/services'
 
 const DEFAULT_STATE: GeneralData = {
-  username: 'Rosario',
+  username: 'User_1',
   sensorMinDistance: 19,
-  h: 25,
-  diameter: 40,
+  h: 10,
+  diameter: 25,
 }
 
 export interface GeneralDataSlice {

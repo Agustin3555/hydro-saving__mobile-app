@@ -1,34 +1,35 @@
 import { useState } from 'react'
 import TimeRangeSelector from '../TimeRangeSelector/TimeRangeSelector'
 import ViewByTime from '../ViewByTime/ViewByTime'
+import { useAppStore } from '@/store'
 
 const Day = () => {
-  const [range, setRange] = useState(new Date())
+  const [date, setDate] = useState(new Date())
 
   const handlePrevPress = () => {
-    const newDate = new Date(range)
-    newDate.setDate(range.getDate() - 1)
+    const newDate = new Date(date)
+    newDate.setDate(date.getDate() - 1)
 
-    setRange(newDate)
+    setDate(newDate)
   }
 
   const handleNextPress = () => {
-    const newDate = new Date(range)
-    newDate.setDate(range.getDate() + 1)
+    const newDate = new Date(date)
+    newDate.setDate(date.getDate() + 1)
 
-    setRange(newDate)
+    setDate(newDate)
   }
 
+  const consumptionHistory = useAppStore(store => store.consumptionHistory)
+
   return (
-    <ViewByTime
-      component={
-        <TimeRangeSelector
-          range={range.toLocaleDateString()}
-          handlePrevPress={handlePrevPress}
-          handleNextPress={handleNextPress}
-        />
-      }
-    ></ViewByTime>
+    <ViewByTime extraInfo={[{ value: 1 }]}>
+      <TimeRangeSelector
+        range={date.toLocaleDateString()}
+        handlePrevPress={handlePrevPress}
+        handleNextPress={handleNextPress}
+      />
+    </ViewByTime>
   )
 }
 

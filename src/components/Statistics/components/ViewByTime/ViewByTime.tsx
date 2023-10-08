@@ -1,41 +1,28 @@
 import { Text, View } from 'react-native'
 import { styles } from './ViewByTime.styled'
-import { useAppStore } from '@/store'
 import { ReactElement } from 'react'
 
-const ViewByTime = ({ component }: { component: ReactElement }) => {
-  // const consumptionHistory = useAppStore(store => store.consumptionHistory)
-  // const consumptionThisDay = useAppStore(store => store.consumptionThisDay)
-
+const ViewByTime = ({
+  extraInfo,
+  children,
+}: {
+  extraInfo?: { value: number; unit?: string; desc?: string }[]
+  children: ReactElement | ReactElement[]
+}) => {
   return (
-    <View>
-      {component}
-      <View style={styles.info}>
-        <View style={styles.infoCard}>
-          <View style={styles.valueGroup}>
-            <Text style={styles.value}>0.05</Text>
-            <Text style={styles.unit}>litros</Text>
+    <View style={styles.container}>
+      {children}
+      {extraInfo &&
+        extraInfo.map((item, index) => (
+          <View style={styles.infoCard} key={index}>
+            <View style={styles.valueGroup}>
+              <Text style={styles.value}>{item.value}</Text>
+              <Text style={styles.unit}>{item.unit ? item.unit : 'litros'}</Text>
+            </View>
+            <View style={styles.separator} />
+            <Text style={styles.desc}>{item.desc ? item.desc : 'Consumo'}</Text>
           </View>
-          <View style={styles.separator} />
-          <Text style={styles.desc}>Menos que la semana anterior</Text>
-        </View>
-        <View style={styles.infoCard}>
-          <View style={styles.valueGroup}>
-            <Text style={styles.value}>1025</Text>
-            <Text style={styles.unit}>litros</Text>
-          </View>
-          <View style={styles.separator} />
-          <Text style={styles.desc}>Consumo</Text>
-        </View>
-        <View style={styles.infoCard}>
-          <View style={styles.valueGroup}>
-            <Text style={styles.value}>1025</Text>
-            <Text style={styles.unit}>litros</Text>
-          </View>
-          <View style={styles.separator} />
-          <Text style={styles.desc}>Más que la semana anterior</Text>
-        </View>
-      </View>
+        ))}
     </View>
   )
 }

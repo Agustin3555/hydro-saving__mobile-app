@@ -1,5 +1,7 @@
+export { default as ConsumptionChart } from './ConsumptionChart/ConsumptionChart'
 export { default as Day } from './Day/Day'
 export { default as Month } from './Month/Month'
 export { default as TimeRangeSelector } from './TimeRangeSelector/TimeRangeSelector'
 export { default as ViewByTime } from './ViewByTime/ViewByTime'
 export { default as Week } from './Week/Week'
+export { default as Year } from './Year/Year'

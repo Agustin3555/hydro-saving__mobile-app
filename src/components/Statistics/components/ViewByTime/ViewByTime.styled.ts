@@ -2,13 +2,13 @@ import { COLOR, FONT_SIZE, MAIN_GAP, NOT_FONT_SIZE } from '@/styles'
 import { StyleSheet } from 'react-native'
 
 export const styles = StyleSheet.create({
-  info: {
+  container: {
     gap: MAIN_GAP * 0.5,
   },
   infoCard: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: MAIN_GAP * 0.75,
+    gap: FONT_SIZE.l,
     padding: FONT_SIZE.l,
     borderRadius: NOT_FONT_SIZE.xs,
     backgroundColor: COLOR.g_1,

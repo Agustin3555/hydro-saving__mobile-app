@@ -5,6 +5,9 @@ export const styles = StyleSheet.create({
   scrollContainer: {
     paddingHorizontal: MAIN_GAP * 0.5,
   },
+  container: {
+    gap: MAIN_GAP,
+  },
   viewSelector: {
     alignSelf: 'center',
 

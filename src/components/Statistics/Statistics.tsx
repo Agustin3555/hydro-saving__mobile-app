@@ -4,7 +4,7 @@ import { SECTIONS, useAppStore } from '@/store'
 import { useState } from 'react'
 import { styles } from './Statistics.styled'
 import { COLOR } from '@/styles'
-import { Day, Month, Week } from './components'
+import { Day, Month, Week, Year } from './components'
 
 enum VIEWS {
   day,
@@ -15,7 +15,7 @@ enum VIEWS {
 
 const viewsText = ['Día', 'Semana', 'Mes', 'Año']
 
-const views = [<Day />, <Week />, <Month />, <Text>Año</Text>]
+const views = [<Day />, <Week />, <Month />, <Year />]
 
 const Statistics = () => {
   const [viewCurrent, setViewCurrent] = useState(VIEWS.day)
@@ -48,7 +48,7 @@ const Statistics = () => {
           ))}
         </View>
         {views[viewCurrent]}
-        <Text>{JSON.stringify(consumptionHistory)}</Text>
+        {/* <Text>{JSON.stringify(consumptionHistory)}</Text> */}
       </ScrollView>
     </Section>
   )
