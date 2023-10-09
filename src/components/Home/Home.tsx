@@ -12,20 +12,21 @@ import { faFaucetDrip } from '@fortawesome/free-solid-svg-icons'
 const Home = () => {
   const { sensorMinDistance, h } = useAppStore(store => store.generalData)
   const { sensorDistance, flowRate } = useAppStore(store => store.tankData)
+  const deviceConnection = useAppStore(store => store.deviceConnection)
 
   // TODO: utilizarlo
-  const [loaded, setLoaded] = useState(false)
   const [percent, setPercent] = useState(0)
+
   const maxDistance = useMemo(() => sensorMinDistance + h, [sensorMinDistance, h])
 
   useEffect(() => {
-    let auxDistance = sensorDistance
+    let auxDistance = sensorDistance / 10
 
-    if (auxDistance < sensorMinDistance) auxDistance = sensorMinDistance
-    if (auxDistance > maxDistance) auxDistance = maxDistance
+    // Limitar el valor
+    auxDistance = Math.min(Math.max(auxDistance, sensorMinDistance), maxDistance)
     auxDistance = auxDistance - sensorMinDistance
 
-    const newPercent = Math.floor((auxDistance / h) * 100)
+    const newPercent = Math.floor((1 - auxDistance / h) * 100)
 
     setPercent(newPercent)
   }, [sensorDistance])
@@ -44,7 +45,7 @@ const Home = () => {
   return (
     <Section sectionKey={SECTIONS.home}>
       <Text style={styles.desc} numberOfLines={2}>
-        {loaded
+        {deviceConnection
           ? 'El porcentaje actual de carga es'
           : 'Conectando con el dispositivo ...'}
       </Text>

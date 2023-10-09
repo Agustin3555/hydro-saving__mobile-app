@@ -6,8 +6,8 @@ const DEFAULT_STATE: ConsumptionHistoryItem[] = []
 const startDate = new Date('2020-10-01 0:0')
 const endDate = new Date() // Fecha actual
 
-const minConsumption = 3500
-const maxConsumption = 5500
+const minConsumption = 4000
+const maxConsumption = 7500
 
 const daysBetween = Math.floor(
   (endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24)

@@ -1,5 +1,6 @@
 export * from './consumptionHistory.slice'
 export * from './consumptionThisDay.slice'
 export * from './currentSection.slice'
+export * from './deviceConnection.slice'
 export * from './generalData.slice'
 export * from './tankData.slice'

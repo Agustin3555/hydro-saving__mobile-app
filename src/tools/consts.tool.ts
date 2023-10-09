@@ -1,0 +1,1 @@
+export const AVERAGE_CONSUMPTION = 5750

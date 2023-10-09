@@ -6,6 +6,7 @@ import {
   createConsumptionHistorySlice,
   createTankDataSlice,
   createConsumptionThisDaySlice,
+  createDeviceConnectionSlice,
 } from './slices'
 
 export const useAppStore = create<AppStore>()((...a) => ({
@@ -14,4 +15,5 @@ export const useAppStore = create<AppStore>()((...a) => ({
   ...createConsumptionHistorySlice(...a),
   ...createTankDataSlice(...a),
   ...createConsumptionThisDaySlice(...a),
+  ...createDeviceConnectionSlice(...a),
 }))

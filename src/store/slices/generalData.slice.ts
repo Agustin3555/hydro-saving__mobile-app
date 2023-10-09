@@ -4,9 +4,9 @@ import { getGeneralData, updateGeneralData } from '@/services'
 
 const DEFAULT_STATE: GeneralData = {
   username: 'User_1',
-  sensorMinDistance: 19,
-  h: 10,
-  diameter: 25,
+  sensorMinDistance: 11,
+  h: 14,
+  diameter: 30,
 }
 
 export interface GeneralDataSlice {
