@@ -13,7 +13,7 @@ const ConsumptionChart = ({
   return (
     <View style={styles.container}>
       {values.map((item, index) => (
-        <View style={styles.item} key={item.ref}>
+        <View style={styles.item} key={item.ref + index.toString()}>
           <View style={styles.barContainer}>
             <View
               style={[

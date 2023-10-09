@@ -4,6 +4,7 @@ import ViewByTime from '../ViewByTime/ViewByTime'
 import ConsumptionChart from '../ConsumptionChart/ConsumptionChart'
 import { useAppStore } from '@/store'
 import { filterByRange } from '../../tools'
+import { AVERAGE_CONSUMPTION } from '@/tools'
 
 const DAYS = ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab']
 
@@ -58,8 +59,31 @@ const Week = () => {
     }))
   }, [consumptionHistory, startOfWeek, endOfWeek])
 
+  const { consumption, consumptionByAverage } = useMemo(() => {
+    let consumption = 0
+
+    const thisWeek = filterByRange(consumptionHistory, startOfWeek, endOfWeek)
+    if (thisWeek !== undefined)
+      consumption = thisWeek.reduce((total, item) => total + item.consumption, 0)
+
+    const weekAverage = AVERAGE_CONSUMPTION * 7
+
+    const consumptionByAverage =
+      consumption < weekAverage
+        ? {
+            value: weekAverage - consumption,
+            desc: 'Menos que el promedio',
+          }
+        : {
+            value: consumption - weekAverage,
+            desc: 'Más que el promedio',
+          }
+
+    return { consumption, consumptionByAverage }
+  }, [consumptionHistory, startOfWeek, endOfWeek])
+
   return (
-    <ViewByTime>
+    <ViewByTime extraInfo={[{ value: consumption }, consumptionByAverage]}>
       <TimeRangeSelector
         range={`${startOfWeek.toLocaleDateString()}  -  ${endOfWeek.toLocaleDateString()}`}
         handlePrevPress={handlePrevPress}

@@ -17,7 +17,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'baseline',
     gap: MAIN_GAP * 0.25,
-    width: NOT_FONT_SIZE.xl,
+    width: NOT_FONT_SIZE['2xl'] - NOT_FONT_SIZE.xs,
   },
   value: {
     fontFamily: 'Inter-Regular',

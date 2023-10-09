@@ -4,6 +4,7 @@ import ViewByTime from '../ViewByTime/ViewByTime'
 import ConsumptionChart from '../ConsumptionChart/ConsumptionChart'
 import { filterByRange } from '../../tools'
 import { useAppStore } from '@/store'
+import { AVERAGE_CONSUMPTION } from '@/tools'
 
 const MONTHS = [
   'Enero',
@@ -75,8 +76,31 @@ const Month = () => {
     }))
   }, [consumptionHistory, startOfMonth, endOfMonth])
 
+  const { consumption, consumptionByAverage } = useMemo(() => {
+    let consumption = 0
+
+    const thisMonth = filterByRange(consumptionHistory, startOfMonth, endOfMonth)
+    if (thisMonth !== undefined)
+      consumption = thisMonth.reduce((total, item) => total + item.consumption, 0)
+
+    const monthAverage = AVERAGE_CONSUMPTION * 30
+
+    const consumptionByAverage =
+      consumption < monthAverage
+        ? {
+            value: monthAverage - consumption,
+            desc: 'Menos que el promedio',
+          }
+        : {
+            value: consumption - monthAverage,
+            desc: 'Más que el promedio',
+          }
+
+    return { consumption, consumptionByAverage }
+  }, [consumptionHistory, startOfMonth, endOfMonth])
+
   return (
-    <ViewByTime>
+    <ViewByTime extraInfo={[{ value: consumption }, consumptionByAverage]}>
       <TimeRangeSelector
         range={`${MONTHS[startOfMonth.getMonth()]}  ${startOfMonth.getFullYear()}`}
         handlePrevPress={handlePrevPress}

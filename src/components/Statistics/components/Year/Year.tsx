@@ -3,21 +3,10 @@ import TimeRangeSelector from '../TimeRangeSelector/TimeRangeSelector'
 import ViewByTime from '../ViewByTime/ViewByTime'
 import { useAppStore } from '@/store'
 import { filterByRange } from '../../tools'
+import { AVERAGE_CONSUMPTION } from '@/tools'
+import ConsumptionChart from '../ConsumptionChart/ConsumptionChart'
 
-const MONTHS = [
-  'Enero',
-  'Febrero',
-  'Marzo',
-  'Abril',
-  'Mayo',
-  'Junio',
-  'Julio',
-  'Agosto',
-  'Septiembre',
-  'Octubre',
-  'Noviembre',
-  'Diciembre',
-]
+const MONTHS = ['E', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D']
 
 const Year = () => {
   const [startOfYear, setStartOfYear] = useState(() => {
@@ -56,23 +45,63 @@ const Year = () => {
 
   const consumptionHistory = useAppStore(store => store.consumptionHistory)
 
-  // const values = useMemo(() => {
-  //   const v = filterByRange(consumptionHistory, startOfMonth, endOfMonth)
+  const values = useMemo(() => {
+    const consumptionByMonth = MONTHS.map(month => {
+      const monthIndex = MONTHS.indexOf(month)
+      const monthStart = new Date(startOfYear.getFullYear(), monthIndex, 1)
+      const monthEnd = new Date(startOfYear.getFullYear(), monthIndex + 1, 0)
 
-  //   return v.map((item, index) => ({
-  //     ref: (index + 1).toString(),
-  //     // ref: item.date,
-  //     consumption: item.consumption,
-  //   }))
-  // }, [consumptionHistory, startOfMonth, endOfMonth])
+      const consumptionThisMonth = filterByRange(
+        consumptionHistory,
+        monthStart,
+        monthEnd
+      )
+
+      const totalConsumption = consumptionThisMonth.reduce(
+        (total, item) => total + item.consumption,
+        0
+      )
+
+      return {
+        ref: month,
+        consumption: totalConsumption,
+      }
+    })
+
+    return consumptionByMonth
+  }, [consumptionHistory, startOfYear])
+
+  const { consumption, consumptionByAverage } = useMemo(() => {
+    let consumption = 0
+
+    const thisYear = filterByRange(consumptionHistory, startOfYear, endOfYear)
+    if (thisYear !== undefined)
+      consumption = thisYear.reduce((total, item) => total + item.consumption, 0)
+
+    const yearAverage = AVERAGE_CONSUMPTION * 365
+
+    const consumptionByAverage =
+      consumption < yearAverage
+        ? {
+            value: yearAverage - consumption,
+            desc: 'Menos que el promedio',
+          }
+        : {
+            value: consumption - yearAverage,
+            desc: 'Más que el promedio',
+          }
+
+    return { consumption, consumptionByAverage }
+  }, [consumptionHistory, startOfYear, endOfYear])
 
   return (
-    <ViewByTime>
+    <ViewByTime extraInfo={[{ value: consumption }, consumptionByAverage]}>
       <TimeRangeSelector
         range={startOfYear.getFullYear().toString()}
         handlePrevPress={handlePrevPress}
         handleNextPress={handleNextPress}
       />
+      <ConsumptionChart maxConsumption={15000 * 30} values={values} />
     </ViewByTime>
   )
 }

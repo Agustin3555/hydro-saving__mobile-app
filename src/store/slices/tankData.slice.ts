@@ -1,7 +1,7 @@
 import { TankData } from '@/models'
 import { Slice } from '../slice'
 
-const DEFAULT_STATE: TankData = { sensorDistance: 110, flowRate: 0 }
+const DEFAULT_STATE: TankData = { sensorDistance: 0, flowRate: 0 }
 
 export interface TankDataSlice {
   tankData: TankData

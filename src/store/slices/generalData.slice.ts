@@ -4,7 +4,7 @@ import { getGeneralData, updateGeneralData } from '@/services'
 
 const DEFAULT_STATE: GeneralData = {
   username: 'User_1',
-  sensorMinDistance: 11,
+  sensorMinDistance: 11.1,
   h: 14,
   diameter: 30,
 }

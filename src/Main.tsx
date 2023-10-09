@@ -16,6 +16,7 @@ import { getTankData } from './services'
 const Main = () => {
   const setTankData = useAppStore(store => store.setTankData)
   const accumulateConsumption = useAppStore(store => store.accumulateConsumption)
+  const setDeviceConnection = useAppStore(store => store.setDeviceConnection)
 
   useEffect(() => {
     const interval = setInterval(async () => {
@@ -24,7 +25,11 @@ const Main = () => {
       if (tankData) {
         setTankData(tankData)
         accumulateConsumption(tankData.flowRate)
+        setDeviceConnection(true)
+        return
       }
+
+      setDeviceConnection(false)
     }, 1000)
 
     return () => {

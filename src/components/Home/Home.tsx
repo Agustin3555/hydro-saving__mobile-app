@@ -10,23 +10,22 @@ import Icon from '../Icon/Icon'
 import { faFaucetDrip } from '@fortawesome/free-solid-svg-icons'
 
 const Home = () => {
+  const deviceConnection = useAppStore(store => store.deviceConnection)
   const { sensorMinDistance, h } = useAppStore(store => store.generalData)
   const { sensorDistance, flowRate } = useAppStore(store => store.tankData)
-  const deviceConnection = useAppStore(store => store.deviceConnection)
-
-  // TODO: utilizarlo
   const [percent, setPercent] = useState(0)
-
   const maxDistance = useMemo(() => sensorMinDistance + h, [sensorMinDistance, h])
 
   useEffect(() => {
     let auxDistance = sensorDistance / 10
 
+    auxDistance = auxDistance + 11
+
     // Limitar el valor
     auxDistance = Math.min(Math.max(auxDistance, sensorMinDistance), maxDistance)
     auxDistance = auxDistance - sensorMinDistance
 
-    const newPercent = Math.floor((1 - auxDistance / h) * 100)
+    const newPercent = Math.round((1 - auxDistance / h) * 100)
 
     setPercent(newPercent)
   }, [sensorDistance])
